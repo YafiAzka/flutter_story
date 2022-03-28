@@ -60,13 +60,12 @@ class ProductPage extends StatelessWidget {
               crossAxisCount: 2,
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
-              itemBuilder: (BuildContext context, int index) => ProductCard(
-                id: shoesList[index].id,
-                name: shoesList[index].name,
-                image: shoesList[index].image,
-                price: shoesList[index].price,
-                rating: shoesList[index].rating,
-              ),
+              itemBuilder: (BuildContext context, int index) {
+								final ProductModel shoe = shoesList[index];
+								return ProductCard(
+									product: shoe,
+								);
+							} 
             ),
           ],
         ),

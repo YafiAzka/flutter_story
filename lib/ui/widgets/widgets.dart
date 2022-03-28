@@ -146,21 +146,21 @@ class CategoryButton extends StatelessWidget {
 
 class ProductCard extends StatelessWidget {
   // final ProductModel shoeList
-  final int id;
-  final String name;
-  final String image;
-  final double rating;
-  final double price;
+  // final int id;
+  // final String name;
+  // final String image;
+  // final double rating;
+  // final double price;
   final bool readonly;
-  final ProductModel? shoeList;
+  final ProductModel product;
   ProductCard({
     Key? key,
-    this.id = 0,
-    this.name = '',
-    this.image = '',
-    this.rating = 0,
-    this.price = 0,
-    this.shoeList,
+    // this.id = 0,
+    // this.name = '',
+    // this.image = '',
+    // this.rating = 0,
+    // this.price = 0,
+    required this.product,
     this.readonly = false,
   }) : super(key: key);
 
@@ -171,7 +171,7 @@ class ProductCard extends StatelessWidget {
           ? Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => DetailProduct(shoeList),
+                builder: (context) => DetailProduct(product),
               ),
             )
           : {},
@@ -186,14 +186,14 @@ class ProductCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(image),
+            Image.asset(product.image),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: defaultMargin),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    name,
+                    product.name,
                     overflow: TextOverflow.ellipsis,
                     style: whiteTextStyle.copyWith(fontWeight: bold),
                   ),
@@ -201,7 +201,7 @@ class ProductCard extends StatelessWidget {
                   Row(
                     children: [
                       RatingBar.builder(
-                        initialRating: rating,
+                        initialRating: product.rating,
                         ignoreGestures: true,
                         minRating: 1,
                         unratedColor: grey4,
@@ -234,7 +234,7 @@ class ProductCard extends StatelessWidget {
                       symbol: 'IDR ',
                       decimalDigits: 0,
                     ).format(
-                      price,
+                      product.price,
                     ),
                     style: whiteTextStyle,
                   ),
