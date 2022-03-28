@@ -8,8 +8,8 @@ import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 
 class DetailProduct extends StatefulWidget {
-  ProductModel? shoeList;
-  DetailProduct(this.shoeList, {Key? key}) : super(key: key);
+  ProductModel product;
+  DetailProduct(this.product, {Key? key}) : super(key: key);
 
   @override
   State<DetailProduct> createState() => _DetailProductState();
@@ -31,7 +31,7 @@ class _DetailProductState extends State<DetailProduct> {
             Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/products/product1.png'),
+                  image: AssetImage(widget.product.image),
                 ),
               ),
             ),
@@ -143,7 +143,7 @@ class _DetailProductState extends State<DetailProduct> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Nike Air Force X-AC Girl Style',
+              widget.product.name,
               style: whiteTextStyle.copyWith(
                 fontWeight: bold,
                 fontSize: 18,
@@ -151,7 +151,7 @@ class _DetailProductState extends State<DetailProduct> {
             ),
             SizedBox(height: 12),
             RatingBar.builder(
-              initialRating: 4.5,
+              initialRating: widget.product.rating,
               ignoreGestures: true,
               minRating: 1,
               unratedColor: grey4,
@@ -176,7 +176,7 @@ class _DetailProductState extends State<DetailProduct> {
                     symbol: 'IDR ',
                     decimalDigits: 0,
                   ).format(
-                    1650000,
+                    widget.product.price,
                   ),
                   style: whiteTextStyle.copyWith(
                     fontWeight: bold,
@@ -228,7 +228,8 @@ class _DetailProductState extends State<DetailProduct> {
             ),
             SizedBox(height: 12),
             Text(
-              'This shoes material is canvas press with foam mat, bring back your high school moment with this shoes. Choose your size and just wait for it.',
+              // 'This shoes material is canvas press with foam mat, bring back your high school moment with this shoes. Choose your size and just wait for it.',
+							widget.product.description,
               style: whiteTextStyle,
             ),
           ],
@@ -259,14 +260,13 @@ class _DetailProductState extends State<DetailProduct> {
               crossAxisCount: 2,
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
-              itemBuilder: (BuildContext context, int index) => ProductCard(
-                id: shoesList[index].id,
-                name: shoesList[index].name,
-                image: shoesList[index].image,
-                price: shoesList[index].price,
-                rating: shoesList[index].rating,
-                readonly: true,
-              ),
+              itemBuilder: (BuildContext context, int index) {
+								final ProductModel shoe = shoesList[index];
+								return ProductCard(
+									product: shoe,
+									readonly: true,
+								);
+							} 
             ),
           ],
         ),

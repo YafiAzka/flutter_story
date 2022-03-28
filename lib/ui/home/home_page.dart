@@ -168,13 +168,12 @@ class _HomePageState extends State<HomePage> {
                 crossAxisCount: 2,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
-                itemBuilder: (BuildContext context, int index) => ProductCard(
-                  id: productList[index].id,
-                  name: productList[index].name,
-                  image: productList[index].image,
-                  price: productList[index].price,
-                  rating: productList[index].rating,
-                ),
+                itemBuilder: (BuildContext context, int index) {
+									final ProductModel product = productList[index];
+									return ProductCard(
+										product: product,
+									);
+								} 
               ),
             ),
           ],
